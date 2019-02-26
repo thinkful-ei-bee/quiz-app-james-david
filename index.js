@@ -82,13 +82,13 @@ function renderPage() {
 
 function createTop() {
   switch (STORE.view) {
-    case 'startingPage':
-      return `<h1>Welcome to the JavaScript Quiz!</h1>`
-    case 'questionPage':
-       return `<h1>Q${STORE.currentQuestion + 1} ${questions[STORE.currentQuestion]}</h1>`
-    default:
-      return `<h1>Question 1: Lorem etc</h1>
-    <br>`
+  case 'startingPage':
+    return '<h1>Welcome to the JavaScript Quiz!</h1>';
+  case 'questionPage':
+    return `<h1>Q${STORE.currentQuestion + 1} ${questions[STORE.currentQuestion]}</h1>`;
+  default:
+    return `<h1>Question 1: Lorem etc</h1>
+    <br>`;
   }
 }
 
