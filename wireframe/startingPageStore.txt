@@ -1,0 +1,8 @@
+STORE = {
+  view: startingPage,
+  currentQuestion: null,
+  currentResponse: null,
+  questionsComplete: 0,
+  currentCorrect: 0,
+}
+
