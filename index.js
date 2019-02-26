@@ -72,13 +72,28 @@ const STORE = {
 console.log('beginning javascript file');
 
 function renderPage() {
-  $('section#topOfApp').html(`<h1>Question 1: Lorem etc</h1>
-  <br>`);
+  $('section#topOfApp').html(createTop());
   $('form').html(`<input type="radio" name="answer" value="1" required>Answer 1</input><br>
   <input type="radio" name="answer" value="2">Answer 2</input><br>
   <input type="radio" name="answer" value="3">Answer 3</input><br>
   <input type="radio" name="answer" value="4">Answer 4</input><br>
   <button type="submit">Submit</button>`);
+}
+
+function createTop() {
+  switch (STORE.view) {
+    case 'startingPage':
+      return `<h1>Welcome to the JavaScript Quiz!</h1>`
+    case 'questionPage':
+       return `<h1>Q${STORE.currentQuestion + 1} ${questions[STORE.currentQuestion]}</h1>`
+    default:
+      return `<h1>Question 1: Lorem etc</h1>
+    <br>`
+  }
+}
+
+function createForm() {
+
 }
 
 function handleSubmit() {
