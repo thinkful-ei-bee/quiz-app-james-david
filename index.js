@@ -73,11 +73,7 @@ console.log('beginning javascript file');
 
 function renderPage() {
   $('section#topOfApp').html(createTop());
-  $('form').html(`<input type="radio" name="answer" value="1" required>Answer 1</input><br>
-  <input type="radio" name="answer" value="2">Answer 2</input><br>
-  <input type="radio" name="answer" value="3">Answer 3</input><br>
-  <input type="radio" name="answer" value="4">Answer 4</input><br>
-  <button type="submit">Submit</button>`);
+  $('form').html(createForm());
 }
 
 function createTop() {
@@ -86,14 +82,39 @@ function createTop() {
     return '<h1>Welcome to the JavaScript Quiz!</h1>';
   case 'questionPage':
     return `<h1>Q${STORE.currentQuestion + 1} ${questions[STORE.currentQuestion]}</h1>`;
-  default:
-    return `<h1>Question 1: Lorem etc</h1>
-    <br>`;
+  case 'answerPage':
+    if (STORE.currentResponse === rightAnswers[STORE.currentQuestion]) {
+      return '<h1>CORRECT!</h1>';
+    } else {
+      let correctAnswer = answers[STORE.currentQuestion][rightAnswers[STORE.currentQuestion]];
+      return `<h1>INCORRECT!</h1>
+      <p>Correct answer: ${correctAnswer}</p>`;
+    }
+  case 'lastPage':
+    return `<h1>Quiz Complete!</h1>
+    <br>
+    <h2>FINAL SCORE:<br>
+      ${STORE.currentCorrect} correct, ${5 - STORE.currentCorrect} incorrect
+    </h2>`;
   }
 }
 
 function createForm() {
-
+  switch (STORE.view) {
+  case 'startingPage':
+    return '<button type="submit">Start Quiz</button>';
+  case 'questionPage':
+    return `<input type="radio" name="answer" value="1" required>${answers[STORE.currentQuestion][0]}</input><br>
+    <input type="radio" name="answer" value="2">${answers[STORE.currentQuestion][1]}</input><br>
+    <input type="radio" name="answer" value="3">${answers[STORE.currentQuestion][2]}</input><br>
+    <input type="radio" name="answer" value="4">${answers[STORE.currentQuestion][3]}</input><br>
+    <button type="submit">Submit</button>
+    <p>Question ${STORE.currentQuestion + 1} of 5</p><p>Current Score:  ${STORE.currentCorrect} correct, ${5 - STORE.currentCorrect} incorrect</p>`;
+  case 'answerPage':
+    return `<button type="submit">Continue</button><p>Completed ${STORE.currentQuestion + 1} of 5</p><p>Current Score:  ${STORE.currentCorrect} correct, ${5 - STORE.currentCorrect} incorrect</p>`;
+  case 'lastPage':
+    return '<button type="submit">Restart</button>';
+  }
 }
 
 function handleSubmit() {
@@ -103,15 +124,20 @@ function handleSubmit() {
     console.log('Initial state:', STORE);
     if (STORE.view === 'questionPage') {
       let playerAnswer = $('input[name=answer]:checked').val() - 1;
-      STORE.questionsComplete += 1;
-      STORE.currentResponse = playerAnswer;
-      if (playerAnswer === rightAnswers[STORE.currentQuestion] ) {
-        STORE.currentCorrect += 1;
+      if (!isNaN(playerAnswer)) {
+        STORE.questionsComplete += 1;
+        STORE.currentResponse = playerAnswer;
+        if (playerAnswer === rightAnswers[STORE.currentQuestion] ) {
+          STORE.currentCorrect += 1;
+        }
+      } else {
+        return;
       }
-    }
+    } 
     console.log('State after checking for question page', STORE);
     advancePage();
     console.log('State after advancing page', STORE);
+    
   });
 }
 
