@@ -91,29 +91,30 @@ function createTop() {
       <p class="centered">Correct answer: ${correctAnswer}</p>`;
     }
   case 'lastPage':
-    return `<h1>Quiz Complete!</h1>
+    return `<h1 class="centered">Quiz Complete!</h1>
     <br>
-    <h2>FINAL SCORE:<br>
+    <h2 class="centered">FINAL SCORE:<br>
       ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect
     </h2>`;
   }
 }
 
 function createForm() {
+  const whitespace="<br><br><br><br><br><br>";
   switch (STORE.view) {
   case 'startingPage':
-    return '<div class="centered move-down"><button type="submit">Start Quiz</button></div>';
+    return `<div class="centered move-down"><button type="submit">Start Quiz</button>${whitespace}</div>`;
   case 'questionPage':
     return `<input type="radio" name="answer" value="1" required>${answers[STORE.currentQuestion][0]}</input><br>
     <input type="radio" name="answer" value="2">${answers[STORE.currentQuestion][1]}</input><br>
     <input type="radio" name="answer" value="3">${answers[STORE.currentQuestion][2]}</input><br>
     <input type="radio" name="answer" value="4">${answers[STORE.currentQuestion][3]}</input><br>
-    <div class="centered move-down"><button type="submit">Submit</button></div>
-    <p class="centered">Question ${STORE.currentQuestion + 1} of 5</p><p class="centered">Current Score:  ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect</p>`;
+    <div class="centered move-down"><button type="submit">Submit</button>
+    <p class="centered">Question ${STORE.currentQuestion + 1} of 5</p><p class="centered">Current Score:  ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect</p></div>`;
   case 'answerPage':
-    return `<div class="centered move-down"><button type="submit">Continue</button></div><p class="centered">Completed ${STORE.currentQuestion + 1} of 5</p><p class="centered">Current Score:  ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect</p>`;
+    return `<div class="centered move-down"><button type="submit">Continue</button><p class="centered">Completed ${STORE.currentQuestion + 1} of 5</p><p class="centered">Current Score:  ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect</p></div>`;
   case 'lastPage':
-    return '<div class="centered move-down"><button type="submit">Restart</button></div>';
+    return `<div class="centered move-down"><button type="submit">Restart</button>${whitespace}</div>`;
   }
 }
 
