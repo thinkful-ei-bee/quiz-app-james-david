@@ -1,35 +1,35 @@
 'use strict';
 
 const questions = [
-  `What is the effect of this if statement:
-  if ((x % 3 === 0) !== (x % 5 === 0)) {
+  `What is the effect of this <code>if</code> statement:<br>
+  <code>if ((x % 3 === 0) !== (x % 5 === 0)) {
     doSomething();
-  }`, 
+  }</code>`, 
   
-  `What is the effect of this function:
-  function magic(x) {
-    if (x === 1) {
-      return 1;
-    }
-    return x * magic(x - 1);
-  }`,
+  `What is the effect of this function:<br>
+  <p><code>function magic(x) {<br>&ensp;
+    if (x === 1) {<br>&ensp;&ensp;
+      return 1;<br>&ensp;
+    }<br>&ensp;
+    return x * magic(x - 1);<br>
+  }</code></p>`,
 
-  `What does this function return? 
-  function makeSomething() {
-    let a = 0;
-    return function () {
-      a+= 1;
-      return a;
-    }
-  }`,
+  `What does this function return?<br> 
+  <p><code>function makeSomething() {<br>&ensp;
+    let a = 0;<br>&ensp;
+    return function () {<br>&ensp;&ensp;
+      a += 1;<br>&ensp;&ensp;
+      return a;<br>&ensp;
+    }<br>
+  }</code></p>`,
 
   `How does this expression evaluate:
-  2 + 5 * 5 - 2 / 2`,
+  <code>2 + 5 * 5 - 2 / 2</code>`,
 
-  `What does this function do:
-  function zzz(x) {
-    return x.split('e').join('i');
-  }`,
+  `What does this function do:<br>
+  <p><code>function zzz(x) {<br>&ensp;
+    return x.split('e').join('i');<br>
+  }</code></p>`,
 ];
 
 const answers = [
@@ -72,29 +72,29 @@ const STORE = {
 console.log('beginning javascript file');
 
 function renderPage() {
-  $('section#topOfApp').html(createTop());
+  $('section.topOfApp').html(createTop());
   $('form').html(createForm());
 }
 
 function createTop() {
   switch (STORE.view) {
   case 'startingPage':
-    return '<h1>Welcome to the JavaScript Quiz!</h1>';
+    return '<h1 class="centered">Welcome to the JavaScript Quiz!</h1>';
   case 'questionPage':
     return `<h1>Q${STORE.currentQuestion + 1} ${questions[STORE.currentQuestion]}</h1>`;
   case 'answerPage':
     if (STORE.currentResponse === rightAnswers[STORE.currentQuestion]) {
-      return '<h1>CORRECT!</h1>';
+      return '<h1 class="centered">CORRECT!</h1>';
     } else {
       let correctAnswer = answers[STORE.currentQuestion][rightAnswers[STORE.currentQuestion]];
-      return `<h1>INCORRECT!</h1>
-      <p>Correct answer: ${correctAnswer}</p>`;
+      return `<h1 class="centered">INCORRECT!</h1>
+      <p class="centered">Correct answer: ${correctAnswer}</p>`;
     }
   case 'lastPage':
     return `<h1>Quiz Complete!</h1>
     <br>
     <h2>FINAL SCORE:<br>
-      ${STORE.currentCorrect} correct, ${5 - STORE.currentCorrect} incorrect
+      ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect
     </h2>`;
   }
 }
@@ -102,18 +102,18 @@ function createTop() {
 function createForm() {
   switch (STORE.view) {
   case 'startingPage':
-    return '<button type="submit">Start Quiz</button>';
+    return '<div class="centered move-down"><button type="submit">Start Quiz</button></div>';
   case 'questionPage':
     return `<input type="radio" name="answer" value="1" required>${answers[STORE.currentQuestion][0]}</input><br>
     <input type="radio" name="answer" value="2">${answers[STORE.currentQuestion][1]}</input><br>
     <input type="radio" name="answer" value="3">${answers[STORE.currentQuestion][2]}</input><br>
     <input type="radio" name="answer" value="4">${answers[STORE.currentQuestion][3]}</input><br>
-    <button type="submit">Submit</button>
-    <p>Question ${STORE.currentQuestion + 1} of 5</p><p>Current Score:  ${STORE.currentCorrect} correct, ${5 - STORE.currentCorrect} incorrect</p>`;
+    <div class="centered move-down"><button type="submit">Submit</button></div>
+    <p class="centered">Question ${STORE.currentQuestion + 1} of 5</p><p class="centered">Current Score:  ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect</p>`;
   case 'answerPage':
-    return `<button type="submit">Continue</button><p>Completed ${STORE.currentQuestion + 1} of 5</p><p>Current Score:  ${STORE.currentCorrect} correct, ${5 - STORE.currentCorrect} incorrect</p>`;
+    return `<div class="centered move-down"><button type="submit">Continue</button></div><p class="centered">Completed ${STORE.currentQuestion + 1} of 5</p><p class="centered">Current Score:  ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect</p>`;
   case 'lastPage':
-    return '<button type="submit">Restart</button>';
+    return '<div class="centered move-down"><button type="submit">Restart</button></div>';
   }
 }
 
