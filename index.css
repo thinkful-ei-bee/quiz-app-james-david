@@ -1,3 +1,25 @@
 * { 
   box-sizing: border-box;
 }
+
+.appBox {
+    border: 2px solid black; 
+    border-radius: 12px;
+    background-color: rgb(10, 42, 85); 
+    min-height: 400px;
+    padding-left: 20px;
+    color: aliceblue;
+    
+}
+
+input[type="radio"] {
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+button {
+    color: aliceblue;
+    background-color: orangered;
+    border-radius: 6px;
+    font-size: 1.3em;
+}
