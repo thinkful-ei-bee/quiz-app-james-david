@@ -17,6 +17,7 @@ body {
     margin: auto;
     margin-top: 100px;
     padding-left: 20px;
+    padding-right: 20px;
     position: relative;
     color: aliceblue;
 }
@@ -52,4 +53,24 @@ code {
     left: 0;
     right: 0;
     margin: auto;
+}
+
+fieldset {
+    border: none;
+}
+
+.no-text {
+    margin-bottom: 5.5em;
+}
+
+@media only screen and (max-width: 640px) {
+    .appBox {
+        min-height: 650px;
+        margin-top: 0;
+    }
+
+    .move-down {
+        position: static;
+        text-align: center;
+    }
 }

@@ -81,7 +81,7 @@ function createTop() {
   case 'startingPage':
     return '<h1 class="centered">Welcome to the JavaScript Quiz!</h1>';
   case 'questionPage':
-    return `<h1>Q${STORE.currentQuestion + 1} ${questions[STORE.currentQuestion]}</h1>`;
+    return `<legend><h1>Q${STORE.currentQuestion + 1} ${questions[STORE.currentQuestion]}</h1></legend>`;
   case 'answerPage':
     if (STORE.currentResponse === rightAnswers[STORE.currentQuestion]) {
       return '<h1 class="centered">CORRECT!</h1>';
@@ -100,21 +100,20 @@ function createTop() {
 }
 
 function createForm() {
-  const whitespace="<br><br><br><br><br><br>";
   switch (STORE.view) {
   case 'startingPage':
-    return `<div class="centered move-down"><button type="submit">Start Quiz</button>${whitespace}</div>`;
+    return '<div class="centered move-down no-text"><button>Start Quiz</button></div>';
   case 'questionPage':
-    return `<input type="radio" name="answer" value="1" required>${answers[STORE.currentQuestion][0]}</input><br>
-    <input type="radio" name="answer" value="2">${answers[STORE.currentQuestion][1]}</input><br>
-    <input type="radio" name="answer" value="3">${answers[STORE.currentQuestion][2]}</input><br>
-    <input type="radio" name="answer" value="4">${answers[STORE.currentQuestion][3]}</input><br>
-    <div class="centered move-down"><button type="submit">Submit</button>
+    return `<fieldset><label><input type="radio" name="answer" value="1" required>${answers[STORE.currentQuestion][0]}</input></label><br>
+    <label><input type="radio" name="answer" value="2">${answers[STORE.currentQuestion][1]}</input></label><br>
+    <label><input type="radio" name="answer" value="3">${answers[STORE.currentQuestion][2]}</input></label><br>
+    <label><input type="radio" name="answer" value="4">${answers[STORE.currentQuestion][3]}</input></label></fieldset><br>
+    <div class="centered move-down"><button>Submit</button>
     <p class="centered">Question ${STORE.currentQuestion + 1} of 5</p><p class="centered">Current Score:  ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect</p></div>`;
   case 'answerPage':
-    return `<div class="centered move-down"><button type="submit">Continue</button><p class="centered">Completed ${STORE.currentQuestion + 1} of 5</p><p class="centered">Current Score:  ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect</p></div>`;
+    return `<div class="centered move-down"><button>Continue</button><p class="centered">Completed ${STORE.currentQuestion + 1} of 5</p><p class="centered">Current Score:  ${STORE.currentCorrect} correct, ${STORE.questionsComplete - STORE.currentCorrect} incorrect</p></div>`;
   case 'lastPage':
-    return `<div class="centered move-down"><button type="submit">Restart</button>${whitespace}</div>`;
+    return '<div class="centered move-down no-text"><button>Restart</button></div>';
   }
 }
 
